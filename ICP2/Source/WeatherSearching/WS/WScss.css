@@ -1,0 +1,17 @@
+.weatherModule {
+    background: #f2f2f2;
+    height: 550px;
+    width: 650px;
+    border: 1px dashed #ccc;
+    padding: 1em;
+}
+p2{
+    font-family:"Myriad Pro","Helvetica Neue",Helvetica,Arial,Sans-Serif;
+    text-shadow:0 8px 8px gray;
+}
+p2{
+    /* The logo text */
+    font-size:1.5em;
+    padding:0.5em 0 0;
+    text-transform:uppercase;
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.1/angular.min.js" type="application/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="WScss.css" />
+</head>
+<body>
+<div ng-app="Cityweather">
+    <div ng-controller="myController">
+        <p2>Weather Searching</p2>
+        <p>State Code: <input type="text" id="state" ng-model="search"> City Name:<input type="text" id="city"></p>
+        <ul>
+            <li ng-repeat="x in names | filter:search | orderBy:'StateCode'">
+                {{ x.StateName +  ' , ' + (x.StateCode | uppercase) }}
+            </li>
+        </ul>
+    </div>
+    <div ng-controller="weatherctrl">
+        <button id="btn" ng-click="getWeather()"> Show Weather </button>
+        <br/>
+        <br/>
+        <div class="weatherModule">
+            <ps1 class="currentConditions12" ng-bind-html-unsafe="currentweathers.html"></ps1>
+            <p1 class="currentConditions" ng-bind-html-unsafe="currentweather.html"></p1>
+            <div class="currentIcon" ng-bind-html-unsafe="currentIcon.html"></div>
+            <p3 class="currentConditions2" ng-bind-html-unsafe="currentweather2.html"></p3>
+            <div class="currentIcon2" ng-bind-html-unsafe="currentIcon2.html"></div>
+            <p4 class="currentConditions3" ng-bind-html-unsafe="currentweather3.html"></p4>
+            <div class="currentIcon3" ng-bind-html-unsafe="currentIcon3.html"></div>
+            <p5 class="currentConditions4" ng-bind-html-unsafe="currentweather4.html"></p5>
+            <div class="currentIcon4" ng-bind-html-unsafe="currentIcon4.html"></div>
+            <p6 class="currentConditions5" ng-bind-html-unsafe="currentweather5.html"></p6>
+            <div class="currentIcon5" ng-bind-html-unsafe="currentIcon5.html"></div>
+            <p7 class="error1" ng-bind-html-unsafe="currentweather6.html"></p7>
+            <div class="error2" ng-bind-html-unsafe="currentIcon6.html"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    angular.module('otherModoule',[]);
+    angular.module('Cityweather', ['otherModule']).controller('myController', function($scope) {
+        $scope.names = [
+            {StateName:'Alabama',   StateCode:'AL'},
+            {StateName:'Alaska',   StateCode:'AK'},
+            {StateName:'Arizona',   StateCode:'AZ'},
+            {StateName:'Arkansas',   StateCode:'AR'},
+            {StateName:'California',   StateCode:'CA'},
+            {StateName:'Colorado',   StateCode:'CO'},
+            {StateName:'Connecticut',   StateCode:'CT'},
+            {StateName:'Delaware',   StateCode:'DE'},
+            {StateName:'District of Columbia',   StateCode:'DC'},
+            {StateName:'Florida',   StateCode:'FL'},
+            {StateName:'Georgia',   StateCode:'GA'},
+            {StateName:'Hawaii',   StateCode:'HI'},
+            {StateName:'Idaho',   StateCode:'ID'},
+            {StateName:'Illinois',   StateCode:'IL'},
+            {StateName:'Indiana',   StateCode:'IN'},
+            {StateName:'Iowa',   StateCode:'IA'},
+            {StateName:'Kansas',   StateCode:'KS'},
+            {StateName:'Kentucky',   StateCode:'KY'},
+            {StateName:'Louisiana',   StateCode:'LA'},
+            {StateName:'Maine',   StateCode:'ME'},
+            {StateName:'Maryland',   StateCode:'MD'},
+            {StateName:'Massachusetts',   StateCode:'MA'},
+            {StateName:'Michigan',   StateCode:'MI'},
+            {StateName:'Minnesota',   StateCode:'MN'},
+            {StateName:'Mississippi',   StateCode:'MS'},
+            {StateName:'Missouri',   StateCode:'MO'},
+            {StateName:'Montana',   StateCode:'MT'},
+            {StateName:'Nebraska',   StateCode:'NE'},
+            {StateName:'Nevada',   StateCode:'NV'},
+            {StateName:'New Hampshire',   StateCode:'NH'},
+            {StateName:'New Jersey',   StateCode:'NJ'},
+            {StateName:'New Mexico',   StateCode:'NM'},
+            {StateName:'New York',   StateCode:'NY'},
+            {StateName:'North Carolina',   StateCode:'NC'},
+            {StateName:'North Dakota',   StateCode:'ND'},
+            {StateName:'Ohio',   StateCode:'OH'},
+            {StateName:'Oklahoma',   StateCode:'OK'},
+            {StateName:'Oregon',   StateCode:'OR'},
+            {StateName:'Pennsylvania',   StateCode:'PA'},
+            {StateName:'Rhode Island',   StateCode:'RI'},
+            {StateName:'South Carolina',   StateCode:'SC'},
+            {StateName:'South Dakota',   StateCode:'SD'},
+            {StateName:'Tennessee',   StateCode:'TN'},
+            {StateName:'Texas',   StateCode:'TX'},
+            {StateName:'Utah',   StateCode:'UT'},
+            {StateName:'Vermont',   StateCode:'VT'},
+            {StateName:'Virginia',   StateCode:'VA'},
+            {StateName:'Washington',   StateCode:'WA'},
+            {StateName:'West Virginia',   StateCode:'WV'},
+            {StateName:'Wisconsin',   StateCode:'WI'},
+            {StateName:'Wyoming',   StateCode:'WY'}
+        ];
+    });
+    angular.module('otherModule', []).controller('weatherctrl', function($scope, $http) {
+        $scope.getWeather = function() {
+            var stii = document.getElementById("city").value;
+            var stii1 = document.getElementById("state").value;
+            $http.get('https://api.wunderground.com/api/36b799dc821d5836/hourly/q/'+ stii1 +'/'+ stii + '.json').success(function(data) {
+                console.log(data);
+
+                var city1 = data.hourly_forecast[0].FCTTIME.pretty;
+                var temp = data.hourly_forecast[0].temp.english;
+                var icon = data.hourly_forecast[0].icon_url;
+                var weather = data.hourly_forecast[0].condition;
+                console.log(temp);
+                $scope.currentweathers = {
+                    html: "Forcast Time:  " + city1 + "."
+                };
+                $scope.currentweather = {
+                    html: "The temperature is " + temp + " &deg; F and weather is " + weather + ""
+                };
+                $scope.currentIcon = {
+                    html: "<img src='" + icon + "'/>"
+                };
+                var time2 = data.hourly_forecast[1].FCTTIME.civil;
+                var temp2 = data.hourly_forecast[1].temp.english;
+                var icon2 = data.hourly_forecast[1].icon_url;
+                var weather2 = data.hourly_forecast[1].condition;
+                console.log(temp2);
+                $scope.currentweather2 = {
+                    html: "At " + time2 + ", the temperature will be " + temp2 + " &deg; F and weather will be " + weather2 + ""
+                };
+                $scope.currentIcon2 = {
+                    html: "<img src='" + icon2 + "'/>"
+                };
+                var time3 = data.hourly_forecast[2].FCTTIME.civil;
+                var temp3 = data.hourly_forecast[2].temp.english;
+                var icon3 = data.hourly_forecast[2].icon_url;
+                var weather3 = data.hourly_forecast[2].condition;
+                console.log(temp3);
+                $scope.currentweather3 = {
+                    html: "At " + time3 + ", the temperature will be " + temp3 + " &deg; F and weather will be " + weather3 + ""
+                };
+                $scope.currentIcon3 = {
+                    html: "<img src='" + icon3 + "'/>"
+                };
+                var time4 = data.hourly_forecast[3].FCTTIME.civil;
+                var temp4 = data.hourly_forecast[3].temp.english;
+                var icon4 = data.hourly_forecast[3].icon_url;
+                var weather4 = data.hourly_forecast[3].condition;
+                console.log(temp4);
+                $scope.currentweather4 = {
+                    html: "At " + time4 + ", the temperature will be " + temp4 + " &deg; F and weather will be " + weather4 + ""
+                };
+                $scope.currentIcon4 = {
+                    html: "<img src='" + icon4 + "'/>"
+                };
+                var time5 = data.hourly_forecast[4].FCTTIME.civil;
+                var temp5 = data.hourly_forecast[4].temp.english;
+                var icon5 = data.hourly_forecast[4].icon_url;
+                var weather5 = data.hourly_forecast[4].condition;
+                console.log(temp5);
+                $scope.currentweather5 = {
+                    html: "At " + time5 + ", the temperature will be " + temp5 + " &deg; F and weather will be " + weather5 + ""
+                };
+                $scope.currentIcon5 = {
+                    html: "<img src='" + icon5 + "'/>"
+                };
+
+                $scope.currentweather6 = {
+                    html: "You are searching the weather of the  " + stii +  ","+stii1+ ",US"
+                }
+            })
+        }
+    });
+</script>
+</html>
