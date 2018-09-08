@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html ng-app="homeModule">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Rectangle Mobile Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+    Rectangle Template
+    http://www.templatemo.com/preview/templatemo_439_rectangle
+    -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/templatemo-style.css">
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    <style type='text/css'>
+        .partition1 {
+            width: 20%;
+            float: left;
+            margin-right: 10px;
+        }
+
+        .partition2 {
+            width: 70%;
+            float: right;
+        }
+
+        .partition-wrap {
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        td{
+            margin: 5px;
+        }
+
+    </style>
+</head>
+<body>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+<div class="site-bg"></div>
+<!--
+<div class="site-bg-overlay"></div>
+-->
+<!-- TOP HEADER -->
+<div class="top-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <p class="phone-info">Call us: <a href="#">010 020 0340</a></p>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="social-icons">
+                    <ul>
+                        <li><a href="#" class="fa fa-facebook"></a></li>
+                        <li><a href="#" class="fa fa-twitter"></a></li>
+                        <li><a href="#" ng-click="logout()" class="fa fa-sign-out"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- .top-header -->
+
+<div class="visible-xs visible-sm responsive-menu">
+    <a href="#" class="toggle-menu">
+        <i class="fa fa-bars"></i> Show Menu
+    </a>
+    <div class="show-menu">
+        <ul class="main-menu">
+            <li>
+                <a class="show-1 active homebutton" href="#"><i class="fa fa-home"></i>Home</a>
+            </li>
+            <li>
+                <a class="show-2 aboutbutton" href="#"><i class="fa fa-search"></i>Functions</a>
+            </li>
+            <li>
+                <a class="show-5 contactbutton" href="#"><i class="fa fa-envelope"></i>Contact</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container" id="page-content">
+    <div class="row">
+        <div class="col-md-9 col-sm-12 content-holder">
+            <!-- CONTENT -->
+            <div id="menu-container">
+                <div id="menu-1" class="homepage home-section text-center">
+                    <div class="welcome-text">
+                        <h2>Hello, Welcome to <strong>ICP3 Home Page</strong></h2>
+                        <p>This ICP3 is  <strong>Mashup Web Application</strong> which is build by using <strong>Watson Text to speech API & Edamam's
+Nutrition Analysis  API</strong>. </p>
+                        <br/>
+                        <form action="#" method="get" class="subscribe-form">
+                            <div class="row">
+                                <fieldset class="col-md-offset-2 col-md-6">
+                                    <input name="subscribe-email" type="email" class="email" id="subscribe-email"
+                                           placeholder="Write your email here..">
+                                </fieldset>
+                                <fieldset class="col-md-4 button-holder">
+                                    <input name="submit" type="submit" class="button default" id="submit"
+                                           value="Submit">
+                                </fieldset>
+                            </div>
+                            <p class="subscribe-text">Please subscribe your email for latest updates!</p>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="menu-2" class="content about-section" ng-controller="weatherctrl">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8" style="width: 50%; " >
+                            <div class="box-content profile">
+                                <h3 class="widget-title"><strong>Nutrition Searching</strong></h3>
+                                <form class="contact-form" >
+                                    <fieldset>
+                                        <input type="text" style="width: 60%;" width=100px class="name" id="city"
+                                               ng-model="search" placeholder="Enter Food Name...">
+                                    </fieldset>
+                                    <fieldset>
+                                        <input type="text" style="width: 60%;" width=100px class="name" id="state"
+                                               ng-model="foodNo" placeholder="Enter Quantity...">
+                                    </fieldset>
+                                    <button id="btn" style="padding:9px 18px;" class="button" ng-click="getWeather()"> SUBMIT </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-sm-8" style="width: 50%;">
+                            <div class="box-content profile">
+                                <h3 class="widget-title"><strong>Watson Text to Speech</strong></h3>
+                                <form class="contact-form">
+                                    <fieldset>
+                                        <textarea rows="2" cols="50" style="width: 100%;" type="text" id="text1"
+                                                  placeholder="Here to type the wards you want to transfer to speech..."></textarea>
+                                        <input type="button" class="button" style="padding:9px 18px;"
+                                               onclick="changeSource()" value="SUBMIT">
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8" style="width: 50%;">
+                            <div class="box-content">
+                                <h3 class="widget-title" style="font-weight: 600; ">Results of Nutrition1</h3>
+                                <div ng-controllor="weatherctrl" class="project-item" >
+                                    <p><strong>The nutrition information is:  </strong></p>
+                                    <p2><strong>Calores: {{temp}} </strong></p2>
+                                    <p1>.</p1>
+                                </div>
+                                <div ng-controllor="weatherctrl" class="project-item" >
+                                    <p1><strong>totalWeight(grams):{{weather}} </strong></p1>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8 col-sm-8" style="width: 50%;">
+                            <div class="box-content">
+                                <h3 class="widget-title" style="font-weight: 600">Results of Watson</h3>
+                                <div style="margin-bottom: 20px;">
+                                    <audio id="video1" style="width: 100%;" class="my_audio" controls="controls">
+                                        <source id="source1" src="" type="audio/ogg">
+                                    </audio>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="menu-4" class="content contact-section">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8" style="width: 100%">
+                            <div class="box-content">
+                                <h3 class="widget-title">Send Us A Message</h3>
+                                <form class="contact-form">
+                                    <fieldset>
+                                        <input type="text" class="name" id="name" placeholder="Name...">
+                                    </fieldset>
+                                    <fieldset>
+                                        <input type="email" class="email" id="email" placeholder="Email...">
+                                    </fieldset>
+                                    <fieldset>
+                                        <input type="text" class="subject" id="subject" placeholder="Subject...">
+                                    </fieldset>
+                                    <fieldset>
+                                        <textarea name="message" id="message" cols="30" rows="4"
+                                                  placeholder="Message.."></textarea>
+                                    </fieldset>
+                                    <fieldset>
+                                        <input type="submit" class="button" id="button" value="Send Message">
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 hidden-sm">
+
+            <nav id="nav" class="main-navigation hidden-xs hidden-sm">
+                <ul class="main-menu">
+                    <li>
+                        <a class="show-1 active homebutton" href="#"><i class="fa fa-home"></i>Home</a>
+                    </li>
+                    <li>
+                        <a class="show-2 aboutbutton" href="#"><i class="fa fa-search"></i>Functions</a>
+                    </li>
+                    <li>
+                        <a class="show-5 contactbutton" href="#"><i class="fa fa-envelope"></i>Contact</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+</div>
+<!-- SITE-FOOTER -->
+<div class="site-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+            </div>
+        </div>
+    </div>
+</div> <!-- .site-footer -->
+<script src="js/vendor/jquery-1.10.2.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+<script type="text/javascript" src="http://code.angularjs.org/1.1.1/angular.js"></script>
+<script type="text/javascript" src="http://code.angularjs.org/1.1.1/angular-resource.js"></script>
+<script type="text/javascript" src="http://code.angularjs.org/1.1.1/angular-sanitize.js"></script>
+<script src="js/home.js"></script>
+<script type="text/javascript" src="js/services.js"></script>
+<script src="js/googleOauth.js"></script>
+<script src="js/angularOauth.js"></script>
+<!-- templatemo 439 rectangle -->
+</body>
+</html>
