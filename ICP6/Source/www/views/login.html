@@ -1,0 +1,37 @@
+<div class="modal">
+
+  <!-- Modal header bar -->
+  <ion-header-bar class="bar-secondary">
+    <h1 class="title">Login</h1>
+    <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button>
+  </ion-header-bar>
+
+
+  <!-- Modal content area -->
+  <ion-content>
+    <form ng-submit="createTask(task)">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Username:</span>
+          <input type="text" ng-model="task.title">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password:</span>
+          <input type="password">
+        </label>
+      </div>
+      <div class="list">
+        <button class="button button-clear button-positive">
+          Forgot Password?
+        </button>
+        <button class="button button-clear button-positive"style="left: 50px" ng-click="signup()">
+          New User?
+        </button>
+      </div>
+      <div class="padding">
+        <button type="submit" class="button button-block button-positive" ng-click="closeNewTask()">Login</button>
+      </div>
+    </form>
+    
+  </ion-content>
+</div>
