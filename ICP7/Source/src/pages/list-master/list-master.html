@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title text-center>{{ 'SEARCH_TITLE' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!--<ion-searchbar margin-top="5px" placeholder="Please Input Product name" ></ion-searchbar>-->
+  <div>
+    <button ion-button color="primary" block (click)="Pictake1()">Take a Picture</button>
+  </div>
+
+  <ion-item>
+    <ion-label color="primary" stacked icon-only="search">Search the Product</ion-label>
+    <ion-input type="text" (input)="searchForMovie($event, searchKey)"></ion-input>
+  </ion-item>
+
+  <ion-list>
+    <!--<ion-item>-->
+      <!--<ion-thumbnail item-left>-->
+        <!--&lt;!&ndash;<img src="https://image.tmdb.org/t/p/w92{{movie.poster_path}}"/>&ndash;&gt;-->
+        <!--<img src="../../assets/img/profile.png"/>-->
+      <!--</ion-thumbnail>-->
+      <!--&lt;!&ndash;<h2>{{movie.original_title}}</h2>&ndash;&gt;-->
+      <!--<p class="item-description">123</p>-->
+      <!--&lt;!&ndash;<p class="item-description">{{movie.msrp}}</p>&ndash;&gt;-->
+    <!--</ion-item>-->
+    <ion-item *ngFor="let movie of movies" (click)="selectMovie($event, movie)">
+      <ion-thumbnail item-left>
+      <!--<img src="https://image.tmdb.org/t/p/w92{{movie.poster_path}}"/>-->
+      <img src="{{movie.mediumImage}}"/>
+      </ion-thumbnail>
+      <h2>{{movie.name}}</h2>
+      <p class="item-description">{{movie.salePrice}}</p>
+      <p class="item-description">{{movie.msrp}}</p>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
