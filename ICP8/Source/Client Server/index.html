@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" class="no-js">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My AngularJS App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="app.css">
+</head>
+
+<body class="body">
+
+  <div  ng-controller="View1Ctrl" style="top: 200px">
+
+    <div class="menu" id="div_SearchContainer">
+    <h1 align="absolute" style="text-align: center; color: #1ab188">Search product name of your interest!</h1>
+    <input type="text" id="txt_placeName" placeholder="Enter the product name you want to search for" style="margin-left: 100px"/>
+    <!--<input type="text" id="txt_searchFilter" placeholder="Enter the search query"/>-->
+    <button id="btn_getReview" ng-click="getVenues()">Get the product information</button>
+    </div>
+
+    <div id="div_VenueList">
+      <h2 style="margin-left: 100px; color: #1ab188"> Top Three Product From API </h2>
+      <ul>
+       <li ng-repeat="venue in venueList" style="font-size: x-large; color: #5e5e5e; text-align: center; list-style: none; list-style-position:inside;">
+          <a  href="" ng-click="getReviews(venue)" style="font-size: x-large; color: #5e5e5e; text-align: center;">
+              <img src="{{venue.imageUrl}}"/>
+              {{venue.name}},:${{venue.price}}
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+    <div id="div_ReviewList" style="display:none;"  >
+        <p ng-model="ReviewWithSentiment">
+        <TABLE BORDER=2 CELLPADDING=4 ng-show="showt"> <TR> <TH style="color: aliceblue; background:#1ab188" COLSPAN=2>More specific for this product name </TH> </TR>
+        <TR> <TD>Name</TD> <TD>{{ReviewWithSentiment.Name}}</TD> </TR>
+        <TR> <TD>SalePrice</TD> <TD>{{ReviewWithSentiment.SalePrice}}</TD> </TR>
+        <TR> <TD>MSRP</TD> <TD>{{ReviewWithSentiment.Msrp}}</TD> </TR>
+        <TR> <TH style="color: aliceblue; background:#1ab188" COLSPAN=2 BGCOLOR="#445553">{{ReviewWithSentiment.Desc}}</TH> </TR>
+        </TABLE>
+        <span ng-show="shows" style="text-align: center;">{{noText}}</span>
+        </p>
+	</div>
+  </div>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
