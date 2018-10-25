@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>My AngularJS App</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="app.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
+	</head>
+	<body class="body" background="bgform.jpg">
+		<div  ng-controller="View1Ctrl" style="top: 200px">
+		  <div class="menu" id="div_SearchContainer">
+			  <h1 align="absolute" style="text-align: center; color: #5e5e5e"><b>Product Searching</b></h1>
+			  <input type="text" id="txt_placeName" placeholder="Enter the product name you want to search for" style="margin-left: 100px"/>
+			  <button id="btn_getReview" ng-click="getVenues()">Submit</button>
+		  </div>
+		  <div id="div_VenueList">
+			<ul>
+			 <div ng-repeat="venue in venueList" style="font-size: medium; color: #5e5e5e; text-align: center; list-style: none; list-style-position:inside;">
+				 <li>
+					 <img height="30%" width="30%" src="{{venue.imageUrl}}"/>
+				 </li>
+				 <li  href="" ng-click="getReviews(venue)" style="font-size: large; color: #5e5e5e; text-align: center;">
+					{{venue.name}},:${{venue.price}}
+				</li>
+			  </div>
+			</ul>
+		  </div>
+		  <div id="div_ReviewList" style="display:none;"  >
+			  <p ng-model="ReviewWithSentiment">
+			  <TABLE BORDER=2 CELLPADDING=4 ng-show="showt"> <TR> <TH style="color: aliceblue; background:#8a97a0" COLSPAN=2>More specific for this product name </TH> </TR>
+			  <TR> <TD>Name</TD> <TD>{{ReviewWithSentiment.Name}}</TD> </TR>
+			  <TR> <TD>SalePrice</TD> <TD>{{ReviewWithSentiment.SalePrice}}</TD> </TR>
+			  <TR> <TD>MSRP</TD> <TD>{{ReviewWithSentiment.Msrp}}</TD> </TR>
+			  <TR> <TH style="color: aliceblue; background:#8a97a0" COLSPAN=2 BGCOLOR="#5e5e5e">{{ReviewWithSentiment.Desc}}</TH> </TR>
+			  </TABLE>
+			  <span ng-show="shows" style="text-align: center;">{{noText}}</span>
+			  </p>
+		  </div>
+		</div>
+
+	<!-- Modules -->
+	<script type="text/javascript" src="js/app.js"></script>
+
+	</body>
+</html>
